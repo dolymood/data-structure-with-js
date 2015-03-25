@@ -30,7 +30,6 @@ var exchangeSort = require('./exchange/exchange-sort');
 var selectionSort = require('./selection/selection-sort');
 var mergingSort = require('./merging/merging-sort');
 var distributionSort = require('./distribution/distribution-sort');
-var otherSort = require('./sort');
 
 var straightInsertSort = insertionSort.straightInsertSort;
 var binaryInsertSort = insertionSort.binaryInsertSort;
@@ -39,9 +38,9 @@ var staticLinkedListInsertSort = insertionSort.staticLinkedListInsertSort;
 var shellSort = insertionSort.shellSort;
 
 var bubbleSort = exchangeSort.bubbleSort;
-var bubbleSort1 = exchangeSort.bubbleSort1;
+var bubbleSort2 = exchangeSort.bubbleSort2;
 var cockTailSort = exchangeSort.cockTailSort;
-var bubbleSort3 = exchangeSort.bubbleSort3;
+var cockTailSort2 = exchangeSort.cockTailSort2;
 var quickSortRecursive = exchangeSort.quickSortRecursive;
 var quickSortNonRecursive = exchangeSort.quickSortNonRecursive;
 var quickSort = exchangeSort.quickSort;
@@ -94,9 +93,9 @@ var arr21 = [];
 var arr22 = [];
 
 for (var i = 0, len = 100000; i < len; ++i) {
-    var num = parseInt(Math.random() * 1000, 10);
-    //var num = len - i;
-    //var num = i + Math.random() * 10;
+    //var num = parseInt(Math.random() * 1000, 10);   // random case
+    var num = len - i;    // the worst case
+    //var num = i + Math.random() * 10 | 0;     // almost sorted case
 
     arr.push(num);
     arr1.push(num);
@@ -175,17 +174,17 @@ console.log('\n');
 //bubbleSort(arr6);
 //console.timeEnd('bubbleSort');
 
-//console.time('bubbleSort1');
-//bubbleSort1(arr7);
-//console.timeEnd('bubbleSort1');
+//console.time('bubbleSort2');
+//bubbleSort2(arr7);
+//console.timeEnd('bubbleSort2');
 
 //console.time('cockTailSort');
 //cockTailSort(arr8);
 //console.timeEnd('cockTailSort');
 
-//console.time('bubbleSort3');
-//bubbleSort3(arr9);
-//console.timeEnd('bubbleSort3');
+//console.time('cockTailSort2');
+//cockTailSort2(arr9);
+//console.timeEnd('cockTailSort2');
 
 console.time('quickSortRecursive');
 quickSortRecursive(arr10);
@@ -245,25 +244,3 @@ console.timeEnd('radixSort');
 //console.timeEnd('bucketSort');
 
 console.log('\n');
-
-
-
-console.time('shellSort');
-arr3.shellSort();
-console.timeEnd('shellSort');
-
-console.time('quickSort');
-arr4.quickSort();
-console.timeEnd('quickSort');
-
-console.time('stackQuickSort');
-arr6.stackQuickSort();
-console.timeEnd('stackQuickSort');
-
-console.time('mergeSort');
-arr7.mergeSort();
-console.timeEnd('mergeSort');
-
-console.time('heapSort');
-arr8.heapSort();
-console.timeEnd('heapSort');

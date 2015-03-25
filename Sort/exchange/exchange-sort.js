@@ -63,7 +63,7 @@ console.log('bubbleSort:\n' + arr + '');
 
 
 // 冒泡改进1
-function bubbleSort1(sqList){
+function bubbleSort2(sqList){
     var len = sqList.length;
     var change = len - 1;
 
@@ -81,11 +81,11 @@ function bubbleSort1(sqList){
         change = c;
     }
 }
-exports.bubbleSort1 = bubbleSort1;
+exports.bubbleSort2 = bubbleSort2;
 
 var arr = [23, 38, 22, 45, 23, 67, 31, 15, 41];
-bubbleSort1(arr);
-console.log('bubbleSort1:\n' + arr + '');
+bubbleSort2(arr);
+console.log('bubbleSort2:\n' + arr + '');
 
 
 // 相邻两趟反方向起泡的冒泡排序算法
@@ -132,7 +132,7 @@ console.log('cockTailSort:\n' + arr + '');
 
 
 // 改进3
-function bubbleSort3(sqList){
+function cockTailSort2(sqList){
     var b = {};
     var len = sqList.length;
     // d为冒泡方向标识， 1为向上，-1为向下
@@ -162,11 +162,11 @@ function bubbleSort3(sqList){
         d *= -1;
     }
 }
-exports.bubbleSort3 = bubbleSort3;
+exports.cockTailSort2 = cockTailSort2;
 
 var arr = [23, 38, 22, 45, 23, 67, 31, 15, 41];
-bubbleSort3(arr);
-console.log('bubbleSort3:\n' + arr + '');
+cockTailSort2(arr);
+console.log('cockTailSort2:\n' + arr + '');
 
 
 
@@ -265,9 +265,9 @@ function partition(sqList, low, high){
     var temp;
     var i = low;
     var j = high + 1;
-    var rand = Math.random() * (j - i) | 0 + i + 1;
-
+    var rand = Math.random() * (high - low) | 0 + low + 1;
     //var rand = (low + high) >> 1;
+
     temp = sqList[low];
     sqList[low] = sqList[rand];
     sqList[rand] = temp;
@@ -456,7 +456,7 @@ var RED = 0;
 var WHITE = 1;
 var BLUE = 2;
 
-function flagArrage(colors){
+function flagArrange(colors){
     var i = 0;
     var j = 0;
     var k = colors.length - 1;
@@ -487,5 +487,5 @@ function flagArrage(colors){
 }
 
 var arr = [2, 1, 0, 2, 1, 1, 0, 2, 0, 2, 1];
-flagArrage(arr);
+flagArrange(arr);
 console.log(arr + '');

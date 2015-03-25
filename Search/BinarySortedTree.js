@@ -18,7 +18,7 @@
  1  查找思想
  首先将给定的K值与二叉排序树的根结点的关键字进行比较：若相等： 则查找成功；
  ① 给定的K值小于BST的根结点的关键字：继续在该结点的左子树上进行查找；
- ②   给定的K值大于BST的根结点的关键字：继续在该结点的右子树上进行查找。
+ ② 给定的K值大于BST的根结点的关键字：继续在该结点的右子树上进行查找。
 
  在随机情况下，二叉排序树的平均查找长度ASL和㏒(n)(树的深度)是等数量级的。
 
@@ -71,11 +71,11 @@ BSTNode.prototype = {
             if (this.data === key) return this;
             else if (key < this.data) {
                 if (this.leftChild)
-                    return this.search.call(this.leftChild, key);
+                    return this.leftChild.search(key);
             }
             else {
                 if (this.rightChild)
-                    return this.search.call(this.rightChild, key);
+                    return this.rightChild.search(key);
             }
         }
 
@@ -87,7 +87,7 @@ BSTNode.prototype = {
      * @param {*} key
      * @returns {*}
      */
-    search_nonRecursive: search_nonRecursive,
+    searchNonRecursive: searchNonRecursive,
 
     /**
      * BST树的插入（递归）
@@ -101,10 +101,10 @@ BSTNode.prototype = {
             if (key === this.data) return;
             else if (key < this.data) {
                 if (!this.leftChild) this.leftChild = node;
-                this.insert.call(this.leftChild, key);
+                this.leftChild.insert(key);
             } else {
                 if (!this.rightChild) this.rightChild = node;
-                this.insert.call(this.rightChild, key);
+                this.rightChild.insert(key);
             }
         }
     },
@@ -113,7 +113,7 @@ BSTNode.prototype = {
      * BST树的插入（非递归）
      * @param {*} key
      */
-    insert_nonRecursive: function (key) {
+    insertNonRecursive: function (key) {
         var node = new BSTNode(key);
 
         if (this.data == null) this.data = key;
@@ -136,13 +136,13 @@ BSTNode.prototype = {
     /**
      * 利用BST树的插入操作建立一棵BST树
      * @param {Array} arr
-     * @param {Boolean|undefined} usenonRecursive 是否使用非递归
+     * @param {Boolean|undefined} useNonRecursive 是否使用非递归
      */
-    createBST: function (arr, usenonRecursive) {
+    createBST: function (arr, useNonRecursive) {
         var i;
-        if (usenonRecursive) {
+        if (useNonRecursive) {
             for (i = 0; i < arr.length; ++i)
-                this.insert_nonRecursive(arr[i]);
+                this.insertNonRecursive(arr[i]);
         } else {
             for (i = 0; i < arr.length; ++i)
                 this.insert(arr[i]);
@@ -157,7 +157,7 @@ BSTNode.prototype = {
      * @param {BSTNode} parent 父节点，内部调用需要用到
      * @returns {Boolean}
      */
-    'delete': function deleteBST(key, parent) {
+    remove: function deleteBST(key, parent) {
         // 空结点的情况
         if (this.data == null) return false;
         else {
@@ -165,11 +165,11 @@ BSTNode.prototype = {
             if (this.data === key) return deleteNode(this, parent);
             // 查找左子树，如果有的话
             else if (key < this.data) {
-                if (this.leftChild) return this.leftChild['delete'](key, this);
+                if (this.leftChild) return this.leftChild.remove(key, this);
             }
             // 查找右子树，如果有的话
             else {
-                if (this.rightChild) return this.rightChild['delete'](key, this);
+                if (this.rightChild) return this.rightChild.remove(key, this);
             }
         }
 
@@ -182,7 +182,7 @@ BSTNode.prototype = {
      * @param {*} key 需要查找的关键字
      * @returns {boolean}
      */
-    delete_nonRecursive: function (key) {
+    removeNonRecursive: function (key) {
         var p = this;
         var f;
 
@@ -264,10 +264,10 @@ BSTNode.prototype = {
         } else {
             if (node.data > this.data) {
                 if (!this.rightChild) this.rightChild = node;
-                else insertNode.call(this.rightChild, node);
+                else this.rightChild.insertNode(node);
             } else if (node.data < this.data) {
                 if (!this.leftChild) this.leftChild = node;
-                else insertNode.call(this.leftChild, node);
+                else this.leftChild.insertNode(node);
             }
         }
 
@@ -294,7 +294,7 @@ BSTNode.prototype = {
     }
 };
 
-function search_nonRecursive(key) {
+function searchNonRecursive(key) {
     if (this.data == null) return null;
 
     var p = this;
@@ -377,29 +377,29 @@ console.log(bst.search(13));
 
 var bst2 = new BSTNode();
 bst2.createBST([45, 24, 53, 12, 24, 90], true);
-console.log(bst2.search_nonRecursive(12));
-console.log(bst2.search_nonRecursive(13));
+console.log(bst2.searchNonRecursive(12));
+console.log(bst2.searchNonRecursive(13));
 
 console.log('\nfindSiblingElem: ');
 console.log(bst.findNeighborElem(12) + '');
 console.log(bst.findNeighborElem(90) + '');
 console.log(bst.findNeighborElem(45) + '');
 
-console.log(bst['delete'](45));
-console.log(bst['delete'](1));
-console.log(bst['delete'](53));
-console.log(bst['delete'](12));
-console.log(bst['delete'](90));
-console.log(bst['delete'](24));
-console.log(bst['delete'](2));
+console.log(bst.remove(45));
+console.log(bst.remove(1));
+console.log(bst.remove(53));
+console.log(bst.remove(12));
+console.log(bst.remove(90));
+console.log(bst.remove(24));
+console.log(bst.remove(2));
 
-//console.log(bst2.delete_nonRecursive(45));
-//console.log(bst2.delete_nonRecursive(1));
-//console.log(bst2.delete_nonRecursive(53));
-//console.log(bst2.delete_nonRecursive(12));
-//console.log(bst2.delete_nonRecursive(90));
-//console.log(bst2.delete_nonRecursive(24));
-//console.log(bst2.delete_nonRecursive(2));
+//console.log(bst2.removeNonRecursive(45));
+//console.log(bst2.removeNonRecursive(1));
+//console.log(bst2.removeNonRecursive(53));
+//console.log(bst2.removeNonRecursive(12));
+//console.log(bst2.removeNonRecursive(90));
+//console.log(bst2.removeNonRecursive(24));
+//console.log(bst2.removeNonRecursive(2));
 
 console.log('\nisBSTTree: ');
 console.log(BSTNode.isBSTTree(bst));

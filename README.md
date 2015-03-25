@@ -55,8 +55,14 @@ directory
         -- RedBlackTree
         -- B-Tree
         -- B+Tree
-        -- DigitalSearchTree / DictionryTree / DoubleLinkedTree / TrieTree
+        -- DigitalSearchTree / DictionaryTree
+            -- DoubleLinkedTree
+            -- TrieTree
+            -- PatriciaTree    todo
+            -- SuffixTree    todo
         -- HashTable
+        -- Treap    todo
+        -- SplayTree    todo
 
     Sort
         -- insertion sort
@@ -68,9 +74,9 @@ directory
                 
         --  exchange sort
                 -- bubbleSort
-                -- bubbleSort1
+                -- bubbleSort2
                 -- cockTailSort
-                -- bubbleSort3
+                -- cockTailSort2
                 -- quickSortRecursive
                 -- quickSortNonRecursive
                 -- quickSort
